@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentimental Coffee</title>
+</head>
+<body>
+<input type="text" id="name">
+<input type="text" id="review">
+<button onclick="submitReview()">Submit</button>
+<br>
+<p id="info-area"></p>
+<script>
+    function submitReview(){
+        const name=document.getElementById("name").value;
+        const review=document.getElementById("review").value;
+        const URL="/api/add?name="+name+"&review="+review;
+        
+        fetch(URL).then(
+            data=>{
+                return data.json()
+            }
+        ).then(
+            res=>{
+                document.getElementById("info-area").innerText="Review Taken";
+            }
+        )
+    }
+</script>
+</body>
+</html>
