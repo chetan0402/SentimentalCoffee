@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Client</title>
+</head>
+<body onload="loaded()">
+    <table id="dynamic-table">
+        <tr>
+            <th>UUID</th>
+            <th>NAME</th>
+            <th>REVIEW</th>
+            <th>TYPE</th>
+            <th>PROCESSED</th>
+        </tr>
+    </table>
+    <script>
+        function addRow(id,name,review,type,processed){
+            document.getElementById("dynamic-table").innerHTML+="<tr><td>"+id+"</td><td>"+name+"</td><td>"+review+"</td><td>"+type+"</td><td>"+processed+"</td></tr>"
+        }
+
+        function loaded(){
+            fetch("/api/getDB").then(
+                data=>{
+                    return data.json();
+                }
+            ).then(
+                data=>{
+                    Object.keys(data).forEach(
+                        (key)=>{
+                            addRow(key,data[key][0],data[key][1],data[key][2],data[key][3])
+                        }
+                    )
+                }
+            )
+        }
+    </script>
+</body>
+</html>

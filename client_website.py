@@ -34,14 +34,14 @@ def add_review():
 
     con = sqlite3.connect("data.db")
     cur = con.cursor()
-    id = str(uuid.uuid4()).replace("-", "")
+    unique_id = str(uuid.uuid4()).replace("-", "")
     cur.execute("""
     INSERT INTO "main"."data"("uuid","name","review","type","processed") VALUES (?,?,?,NULL,0);
-    """, (id, name, review))
+    """, (unique_id, name, review))
     cur.close()
     con.commit()
     con.close()
-    Thread(target=dataProcessThread, args=(id, review)).start()
+    Thread(target=dataProcessThread, args=(unique_id, review)).start()
     return jsonify({
         "status": "OK"
     })
