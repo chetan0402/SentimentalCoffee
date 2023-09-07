@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 import sqlite3
+import json
 
 app = Flask(__name__)
 
@@ -21,8 +22,8 @@ def giveDB():
         return_dict[element[0]] = [element[1], element[2], element[3], element[4]]
     cur.close()
     con.close()
-    return str(return_dict).replace("'", '"')
+    return json.dumps(return_dict)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8080)

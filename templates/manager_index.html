@@ -28,7 +28,9 @@
                 data=>{
                     Object.keys(data).forEach(
                         (key)=>{
-                            addRow(key,data[key][0],data[key][1],data[key][2],data[key][3])
+                            console.log("Processing");
+                            addRow(key,data[key][0],data[key][1],data[key][2],data[key][3]);
+                            i++;
                         }
                     )
                 }
